@@ -133,6 +133,96 @@ Thus, a single apple is a low-entropy saladoid, but a set of apple slices is a f
 1. Salads are closed under union and addition (the union of a salad and anything else is a salad).
 2. Salads are not closed under subtraction (removing elements from a salad will either produce a salad or a low-entropy saladoid).
 
+## Hyper-Salad Space Standard Projection
+All foods <sup>[[1]](#ft1)</sup> live somewhere in Hyper-Salad Space <sup>[[5]](#ft5)</sup>. Hyper-Salad Space is quite
+high dimensional; research is ongoing into the minimum number of dimensions required to uniquely
+identify every recognizable food.
+
+It tends to be useful to project such high-dimensional spaces down to few enough that humans can visualize them. Thus, we provide the
+*Standard Projection* of Hyper-Salad Space, which has just three particularly salient dimensions.
+
+### Dimensions
+#### Soupiness
+This dimension is simply the value of the soupiness coefficient, as defined in Theorem 1.
+
+#### Ingredient Entropy
+This dimension is a measure of how many ingredients and how many *kinds* of ingredients a hyper-salad contains.
+
+Ingredient Entropy is computed as:
+
+```
+ie = lg(number of ingredients) (number of unique ingredients)
+```
+
+(Note that `lg(x)` is the base-2 log (`ln(x)/ln(2)`).
+
+For example, a glass of coke with 4 ice cubes has ingredient entropy:
+
+```
+ie = lg(5) (2) = 4.64
+```
+
+And a glass of water has ingredient entropy:
+
+```
+ie = lg(1) * 1 = 0
+```
+
+This measure has a few nice properties:
+
+* Monotonically increases as you add more ingredients.
+* Adding ingredients of a distinct nature adds more entropy than
+  adding another of the same ingredient (adding another ice cube is
+  less influential than adding a lemon wedge).
+* Foods with ie < 1 are low-entropy hyper-salads. Everything with
+  ie >= 1 is a proper salad.
+* Foods with 1 ingredient produce a value of 0, negative values are
+  impossible.
+* Foods with 0 ingredients are undefined, which makes sense since
+  foods without any ingredients are null.
+
+#### Arrangement Entropy
+This is a measure of how "well-mixed" a food is. A food is completely well-mixed if you could rearrange all the ingredients, without the average observer considering the difference to be meaningful. In other words, it is a measure of how many degrees of freedom ingredients have to be rearranged.
+
+We define Arrangement Entropy as:
+
+```
+ae = (mean axes of ingredient repositioning) + (mean axes of ingredient rotation)
+```
+
+Where:
+* `axes of ingredient repositioning` is number of orthogonal axes in physical 3D space along which ingredients can be rearranged (have their position uniformly randomized within the original convex hull of the food) without a noticeable difference. When ingredients can be partially rearranged along an axis, we count it as a fractional axis.
+
+* `axes of ingredient rotation` is the average number of orthogonal axis in physical 3D space on which individual ingredients can be rotated (have their angle uniformly randomly changed) without a noticeable difference (rotating around an axis is equivalent to rotating on a plane orthogonal to that axis).
+
+For example, a caesar salad's arrangement entropy is:
+
+```
+ae = 3 + 3 = 6
+```
+
+A pizza's arrangement entropy is approximately:
+
+```
+ae = (2 horizontal axes) + (1 vertical axis) = 3
+```
+
+A hamburger's arrangement entropy is approximately:
+
+```
+ae = (0.5*2 horizontal axes + 0.5 vertical axes) + (1 vertical axis) = 2.5
+```
+
+A hamburger's components can be shifted around a bit horizontally, but the motion is fairly constrained
+because otherwise the burger may become noticeably lopsided. Thus, we count two half-axes for horizontal movement. Vertically, some ingredients can be swapped without substantially altering the nature of the burger (most people won't notice if you swap the tomatoes and onions etc), but you can't shuffle the buns or the patty itself. Finally, you can pretty much only rotate the ingredients around the vertical axis. If you turn the patty (or any other ingredients) sideways, people will notice.
+
+Finally, we consider a piece of salmon nigiri sushi (a slice of raw salmon over sticky rice). 
+
+```
+ae = 0 + 0 = 0
+```
+There's no way you can move or rotate the fish or the blob of sticky rice (which is typically oblong to match the shape of the fish, rather than perfectly round) without someone noticing. It's very orderly.
+
 ## Appendix A: Notable Examples
 ### Sandwiches
 All sandwiches are salads; they just haven't been tossed yet. Typically they have a low soupiness coefficient (unless the sandwich is particularly soggy).
@@ -251,6 +341,9 @@ for example, do seem to at least include candy and water (and by extension, ice)
    are a salad due to their lack of carbs. Which is the right answer, for the wrong reasons. Mashed potatoes *are*
    a hyper-salad, but not because they don't contain carbs (they have plenty of starch). By Cube Rule, mashed potatoes would
    seem to be "toast". See Appendix C.
+
+
+<a name="ft5">[5]</a> Hyper-Salad Space is the correct term, but we won't complain if you want to refer to it as "Salad Hyper-Space" because that sounds *awesome*.
 
 
 <sub>*All opinions are my own and do not necessarily reflect the positions of my employer or any other organizations I am affiliated with.*<sub>
